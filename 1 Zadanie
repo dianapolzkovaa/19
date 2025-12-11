@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _19
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Queue<string> queue = new Queue<string>();
+ 
+            queue.Enqueue("Анна");
+            queue.Enqueue("Пётр");
+            queue.Enqueue("Ольга");
+            queue.Enqueue("Иван");
+            queue.Enqueue("Мария");
+
+            Console.WriteLine("Очередь: " + string.Join(", ", queue));
+
+            while (queue.Count > 0)
+            {
+                string customer = queue.Dequeue();
+                Console.WriteLine("Обслуживаем: " + customer);
+            }
+
+            Console.WriteLine("Очередь пуста");
+        }
+    }
+}
