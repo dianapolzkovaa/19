@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _19
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            HashSet<string> uniqueNames = new HashSet<string>();
+            string input;
+
+            Console.WriteLine("Введите имена по одному. Пустая строка — конец ввода:");
+
+            // Считываем имена до пустой строки
+            while (true)
+            {
+                Console.Write("> ");
+                input = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(input))
+                    break;
+
+                uniqueNames.Add(input); // HashSet автоматически игнорирует дубликаты
+            }
+
+            // Сортируем имена по алфавиту и выводим
+            var sortedNames = uniqueNames.OrderBy(name => name, StringComparer.OrdinalIgnoreCase);
+
+            Console.WriteLine("Уникальные: " + string.Join(", ", sortedNames));
+        
+        }
+    }
+}
