@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _19
+{
+
+    class PageCache
+    {
+        private Queue<string> cache;
+        private int capacity;
+
+        public PageCache(int size = 3)
+        {
+            cache = new Queue<string>();
+            capacity = size;
+        }
+
+        public void Add(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+                return;
+
+            if (cache.Count >= capacity)
+            {
+                string removed = cache.Dequeue();
+              
+            }
+            else
+            {
+                Console.WriteLine($"+ {url}");
+            }
+
+            cache.Enqueue(url);
+        }
+
+        public void PrintCache()
+        {
+            Console.WriteLine("Текущий кэш: " + string.Join(", ", cache));
+        }
+        static void Main()
+        {
+            var cache = new PageCache(3);
+
+            cache.Add("google.com");
+            cache.Add("youtube.com");
+            cache.Add("github.com");
+            cache.Add("vk.com"); 
+
+            cache.PrintCache(); 
+        }
+    }
+}
