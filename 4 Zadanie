@@ -1,0 +1,78 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _19
+{
+   
+class BrowserHistory
+    {
+        private LinkedList<string> history;
+        private LinkedListNode<string> currentNode;
+
+        public BrowserHistory()
+        {
+            history = new LinkedList<string>();
+            currentNode = null;
+        }
+
+        public void Add(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+                return;
+
+            if (currentNode == null)
+            {
+                history.AddFirst(url);
+                currentNode = history.First;
+            }
+            else
+            { 
+                var nextNode = currentNode.Next;
+
+                while (nextNode != null)
+                {
+                    var temp = nextNode;
+                    nextNode = nextNode.Next;
+                    history.Remove(temp);
+                }
+
+                history.AddAfter(currentNode, url);
+                currentNode = currentNode.Next;
+            }
+        }
+
+        public bool Back()
+        {
+            if (currentNode?.Previous == null)
+            {
+                return false;
+            }
+
+            currentNode = currentNode.Previous;
+            return true;
+        }
+        public string CurrentPage => currentNode?.Value;
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            var browser = new BrowserHistory();
+
+            browser.Add("Google.com");
+            browser.Add("youtube.com");
+            browser.Add("github.com");
+
+            browser.Back();
+            browser.Back();
+
+
+            Console.WriteLine("Текущая страница: " + browser.CurrentPage);
+        }
+
+    }
+}
